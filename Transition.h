@@ -1,23 +1,29 @@
-#pragma once
+// #pragma once
 
-#include <sstream>
-#include <string>
+// #include <sstream>
+// #include <string>
 
-class Transition {
+// class Transition {
 
-    private:
-        char transition_state;
-        char write_value;
-        char move_direction;
+//     private:
+//         char transition_state;
+//         char write_value;
+//         char move_direction;
 
-    public:
-        // constructor
-        Transition();
-        Transition(std::istringstream&);
+//     public:
+//         // constructor
+//         Transition();
+//         Transition(std::istringstream&);
         
-        friend std::ostream& operator<<(std::ostream&, const Transition&);
-        operator std::string() const;
+//         friend std::ostream& operator<<(std::ostream&, const Transition&);
+//         operator std::string() const;
 
-    friend class State;
+//     friend class State;
 
+// };
+
+typedef struct Transition {
+    char symbol_read;
+    char write_value;
+    char move_direction;
 };

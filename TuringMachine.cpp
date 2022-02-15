@@ -49,7 +49,7 @@ std::string TuringMachine::simulate() {
 
     int transition_count = 0;
     int tape_position = 0;
-    std::string transition_instr;
+    Transition transition_instr;
 
     while (!(this->states[current_state].isAccept()) || !(this->states[current_state].isReject())) {
 
@@ -59,9 +59,9 @@ std::string TuringMachine::simulate() {
         );
 
         // write
-        this->tape[tape_position] = transition_instr.at(1);
+        this->tape[tape_position] = transition_instr.write_value;
 
-        char move_direction = transition_instr.at(2);
+        char move_direction = transition_instr.move_direction;
         // move head
         if (move_direction == 'L') {
             tape_position--;

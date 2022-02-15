@@ -24,7 +24,7 @@ class State {
 
         // transition functions
         void addTransition(std::istringstream&);
-        std::string transition(char);
+        Transition transition(char);
 
         // getter
         char getState() const;
