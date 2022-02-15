@@ -70,7 +70,7 @@ std::string TuringMachine::simulate() {
         }
 
         // transition
-        this->current_state = this->states[transition_instr.at(0)].getState();
+        this->current_state = this->states[transition_instr.transition_state].getState();
 
         if (transition_count > this->transition_cap) {
             sim_status = "quit";

@@ -28,14 +28,22 @@ State::State(std::istringstream& ss) {
 
 void State::addTransition(std::istringstream& ss) {
     char symbol_read;
+    char transition_state;
     char write_value;
     char move_direction;
 
     ss >> symbol_read;
+    ss >> transition_state;
     ss >> write_value;
     ss >> move_direction;
 
-    Transition t = {symbol_read, write_value, move_direction};
+    std::cout << symbol_read
+                    << transition_state
+                    << write_value
+                    << move_direction
+                    << std::endl;
+
+    Transition t = {transition_state, write_value, move_direction};
 
     this->transitions.insert(std::pair<char, Transition>(symbol_read, t));
 }
