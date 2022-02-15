@@ -1,5 +1,3 @@
-// ./main insertDollarSignAndAppendPoundSign.txt 0110 9
-
 #include <iostream>
 #include <fstream>
 #include <string>

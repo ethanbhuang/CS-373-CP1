@@ -12,7 +12,7 @@ class State {
 
     private:
         std::map<char, Transition> transitions;
-        char state;
+        int state;
         bool is_start;
         bool is_accept;
         bool is_reject;
@@ -27,7 +27,7 @@ class State {
         Transition transition(char);
 
         // getter
-        char getState() const;
+        int getState() const;
         bool isStart() const;
         bool isAccept() const;
         bool isReject() const;

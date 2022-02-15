@@ -15,9 +15,9 @@ class TuringMachine {
 
     private:
         char tape[2000000];
-        char current_state;
+        int current_state;
         int transition_cap;
-        std::map<char, State> states;
+        std::map<int, State> states;
 
 
     public:

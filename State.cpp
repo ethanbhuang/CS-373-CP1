@@ -10,10 +10,10 @@ State::State(std::istringstream& ss) {
     std::string token;
     ss >> token;
 
-    this->state = token.at(0);
+    this->state = std::stoi(token);
     ss >> token;
 
-    if (token == std::string(1, this->state)) {
+    if (token == std::to_string(this->state)) {
         return;
     }
 
@@ -28,7 +28,7 @@ State::State(std::istringstream& ss) {
 
 void State::addTransition(std::istringstream& ss) {
     char symbol_read;
-    char transition_state;
+    std::string transition_state;
     char write_value;
     char move_direction;
 
@@ -37,22 +37,18 @@ void State::addTransition(std::istringstream& ss) {
     ss >> write_value;
     ss >> move_direction;
 
-    std::cout << symbol_read
-                    << transition_state
-                    << write_value
-                    << move_direction
-                    << std::endl;
-
-    Transition t = {transition_state, write_value, move_direction};
+    Transition t = {std::stoi(transition_state), write_value, move_direction};
 
     this->transitions.insert(std::pair<char, Transition>(symbol_read, t));
 }
 
 Transition State::transition(char input) {
+    Transition temp = (this->transitions)[input];
+
     return (this->transitions)[input];
 }
 
-char State::getState() const {
+int State::getState() const {
     return this->state;
 }
 

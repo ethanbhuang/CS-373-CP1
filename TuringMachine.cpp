@@ -1,5 +1,7 @@
  #include "TuringMachine.h"
 
+ #include <iterator>
+
 TuringMachine::TuringMachine()=default;
 
 TuringMachine::TuringMachine(std::string file_name, 
@@ -30,13 +32,14 @@ TuringMachine::TuringMachine(std::string file_name,
 
                 if (new_state.isStart()) this->current_state = new_state.getState();
 
-                states.insert(std::pair<char, State>(new_state.getState(), new_state));
+                states.insert(std::pair<int, State>(new_state.getState(), new_state));
             } else if (token == "transition") {
                 ss >> token;
 
-                states[token.at(0)].addTransition(ss);
+                states[std::stoi(token)].addTransition(ss);
             }
         }
+
         file.close();
     } else {
         std::cerr << "Unable to open file.\n";
@@ -52,6 +55,11 @@ std::string TuringMachine::simulate() {
     Transition transition_instr;
 
     while (!(this->states[current_state].isAccept()) || !(this->states[current_state].isReject())) {
+
+        if (transition_count == this->transition_cap) {
+            sim_status = "quit";
+            break;
+        }
 
         // read
         transition_instr = this->states[this->current_state].transition(
@@ -71,11 +79,6 @@ std::string TuringMachine::simulate() {
 
         // transition
         this->current_state = this->states[transition_instr.transition_state].getState();
-
-        if (transition_count > this->transition_cap) {
-            sim_status = "quit";
-            break;
-        }
 
         if (this->states[this->current_state].isAccept()) {
             sim_status = "accept";
